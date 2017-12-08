@@ -7,23 +7,15 @@ class ContactsController < ApplicationController
     render json: the_contact.as_json
   end
 
-  def all_contacts
+  def index
     # array of contacts
     contacts = Contact.all
-    contact_hashes = []
-    #  I want an array of hashes
-    i = 0
-    contacts.length.times do
-      # take each contact and convert it to a hash
+    render json: contacts.as_json
 
-      the_contact = {first_name: contacts[i].first_name,
-         last_name: contacts[i].last_name,
-         email: contacts[i].email,
-         phone_number: contacts[i].phone_number }
-      contact_hashes << the_contact
-      i += 1
-    end
-    render json: contact_hashes
+  end
 
+  def johns
+    johns = Contact.all_johns
+    render json: johns.as_json
   end
 end
