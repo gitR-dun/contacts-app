@@ -22,8 +22,13 @@ class ContactsController < ApplicationController
       phone_number: params['phone_number'],
       bio: params['bio']
     )
-    contact.save
-    render json: contact.as_json
+    if contact.save
+      # happy path
+      render json: contact.as_json
+    else
+      # sad path
+      render json: {errors: contact.errors.full_messages}
+    end
   end
 
   def update
