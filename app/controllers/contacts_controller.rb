@@ -1,7 +1,11 @@
 class ContactsController < ApplicationController
   def index
     # array of contacts
-    contacts = Contact.all
+    if current_user
+      contacts = current_user.contacts
+    else
+      contacts = []
+    end
     render json: contacts.as_json
   end
 
